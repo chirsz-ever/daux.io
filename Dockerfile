@@ -28,8 +28,13 @@ COPY index.php /daux/index.php
 
 RUN ln -s /daux/bin/daux /usr/local/bin/daux
 
+COPY daux/ /daux/daux/
+
+ARG CACHEBUST=1
+RUN git clone --branch french-translation https://github.com/Overv/VulkanTutorial.git /build/docs
+
 WORKDIR /build
 
 EXPOSE 8085
 
-CMD ["daux"]
+CMD ["daux", "serve", "--host=0.0.0.0"]
