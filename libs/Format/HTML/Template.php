@@ -161,11 +161,15 @@ class Template
 
                 $link = ($path === '') ? $url : $path . '/' . $url;
 
-                $nav[] = [
+                $item = [
                     'title' => $node->getTitle(),
                     'href' => $base_page . $link,
                     'class' => $node->isHotPath() ? 'Nav__item--active' : '',
                 ];
+
+                $item['href'] = str_replace('en/', '', $item['href']);
+
+                $nav[] = $item;
             } elseif ($node instanceof Directory) {
                 if (!$node->hasContent()) {
                     continue;
@@ -187,6 +191,8 @@ class Template
                 if (!empty($folder['children'])) {
                     $folder['class'] .= ' has-children';
                 }
+
+                $folder['href'] = str_replace('en/', '', $folder['href']);
 
                 $nav[] = $folder;
             }

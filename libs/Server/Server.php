@@ -182,6 +182,11 @@ class Server
     {
         $file = DauxHelper::getFile($this->daux->tree, $request);
         if ($file === false) {
+            $request = 'en/' . $request;
+            $file = DauxHelper::getFile($this->daux->tree, $request);
+        }
+
+        if ($file === false) {
             throw new NotFoundException('The Page you requested is yet to be made. Try again later.');
         }
 
