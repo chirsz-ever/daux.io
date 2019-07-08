@@ -1,3 +1,7 @@
+# Build Vulkan tutorial
+
+	docker build --build-arg CACHEBUST=$(date +%s) -t overv/vulkan-tutorial .
+
 # Daux.io
 
 
