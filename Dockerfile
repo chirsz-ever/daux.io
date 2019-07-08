@@ -31,7 +31,7 @@ RUN ln -s /daux/bin/daux /usr/local/bin/daux
 COPY daux/ /daux/daux/
 
 ARG CACHEBUST=1
-RUN git clone --depth 1 --branch french-translation https://github.com/Overv/VulkanTutorial.git /build/docs
+RUN git clone --depth 1 --branch master https://github.com/Overv/VulkanTutorial.git /build/docs
 
 WORKDIR /build
 
