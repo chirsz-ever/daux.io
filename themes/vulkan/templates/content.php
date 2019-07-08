@@ -31,7 +31,7 @@
     <script>
     if (document.location.host) {
         var disqus_config = function() {
-            var path = '/<?= $page['request'] ?>';
+            var path = '/<?= str_replace('en/', '', $page['request']) ?>';
             this.page.identifier = path;
         };
 
