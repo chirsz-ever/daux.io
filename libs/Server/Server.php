@@ -64,7 +64,7 @@ class Server
         $this->daux = $daux;
 
         $this->request = Request::createFromGlobals();
-        $this->base_url = $this->request->getHttpHost() . $this->request->getBaseUrl() . "/";
+        $this->base_url = "/";
     }
 
     /**
@@ -119,8 +119,8 @@ class Server
     {
         $params = $this->daux->getParams();
 
-        DauxHelper::rebaseConfiguration($params, '//' . $this->base_url);
-        $params['base_page'] = '//' . $this->base_url;
+        DauxHelper::rebaseConfiguration($params, $this->base_url);
+        $params['base_page'] = $this->base_url;
         if (!$this->daux->options['live']['clean_urls']) {
             $params['base_page'] .= 'index.php/';
         }
