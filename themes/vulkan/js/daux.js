@@ -111,8 +111,8 @@ $(function () {
     });
 
     // New Tree navigation
-    $('ul.nav.nav-list > li.has-children > a > .arrow').click(function() {
-        $(this).parent().parent().toggleClass('open');
+    $('ul.Nav > li.has-children > a > .Nav__arrow').click(function() {
+        $(this).parent().parent().toggleClass('Nav__item--open');
         return false;
     });
 
