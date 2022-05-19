@@ -125,7 +125,7 @@ class Server
     {
         $config = $this->daux->getConfig();
 
-        DauxHelper::rebaseConfiguration($config, '//' . $this->base_url);
+        DauxHelper::rebaseConfiguration($config, $this->base_url);
 
 
         return $config;
