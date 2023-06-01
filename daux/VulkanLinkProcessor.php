@@ -9,6 +9,9 @@
     use League\CommonMark\Inline\Element\AbstractInline;
     use League\CommonMark\Inline\Element\Code;
     use League\CommonMark\Util\Xml;
+    use Todaymade\Daux\Tree\Directory;
+    use Todaymade\Daux\Tree\Root;
+    use Todaymade\Daux\Tree\Entry;
 
     class VulkanLinkParser implements InlineParserInterface {
         public function getCharacters(): array {
@@ -65,6 +68,25 @@
 
             // Turn code blocks consisting of Vulkan functions into links to the specification
             $environment->addInlineRenderer('League\CommonMark\Inline\Element\Code', new VulkanLinkRenderer());
+        }
+
+        public function manipulateTree(Root $root)
+        {
+            $this->removeIgnoredIndexPage($root);
+        }
+
+        // remove index pages with front matter "ignore: ture"
+        private function removeIgnoredIndexPage(Entry $entry)
+        {
+            if ($entry instanceof Directory) {
+                $content = $entry->getIndexPage();
+                if ($content && $content->getAttribute("ignore")) {
+                    $entry->removeChild($entry->getEntries()[$content->getName()]);
+                }
+                foreach ($entry as $e) { 
+                    $this->removeIgnoredIndexPage($e);
+                }
+            }
         }
     }
 ?>
